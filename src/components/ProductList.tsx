@@ -1,4 +1,6 @@
-"use client";
+"use server";
+import Image from "next/image";
+import { setFlagsFromString } from "v8";
 const getData = async () => {
   const res = await fetch("http://dummyjson.com/products");
   const data = await res.json();
@@ -23,15 +25,14 @@ async function ProductList() {
      w-auto gap-x-10 items-center text-center bg-[url('https://pngtree.com/freebackground/a-festive-scene-with-cheerful-people-exchanging-gifts-and-greetings-against-backdrop-of-colorful-bazaars-bustling-streets_15437998.html')]  
     "
     >
-      {data.products.map((product: Product) => (
+      {data?.products?.map((product: Product) => (
         <div
           key={product.id}
           className="card  bg-green-300 text-center  items-center  flex ml-auto mr-auto gap-5 mt-5 p-5 w-96    hover:transform-gpu bg-[url('https://pngtree.com/freebackground/set-of-different-colours-and-shapes-of-pompoms-in-an-bazaar_15473992.html')]"
         >
-          <img
-            src={product.thumbnail}
+          <Image
+            src={product?.thumbnail}
             alt={product.title}
-            className=""
             width={300}
             height={300}
             className="rounded-md bg-green-300"
@@ -51,11 +52,11 @@ async function ProductList() {
           </div>
           <button
             className="w-full btn btn-primary bg-lime-300 border-none  "
-            onClick={() =>
-              alert(
-                `id: ${product.id}\nprice: ${product.price}$\ntitle: ${product.title}\nrating: ${product.rating}⭐\ndescription: ${product.description}`
-              )
-            }
+            // onClick={() =>
+            //   alert(
+            //     `id: ${product.id}\nprice: ${product.price}$\ntitle: ${product.title}\nrating: ${product.rating}⭐\ndescription: ${product.description}`
+            //   )
+            // }
           >
             More information
           </button>
